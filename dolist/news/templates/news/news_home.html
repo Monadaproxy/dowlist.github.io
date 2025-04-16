@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Заметки
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+
+        <h3>Задачи</h3>
+
+        {% if news %}
+            {% for el in news %}
+                <div class="alert alert-secondary">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.anounce }}</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <span>{{ error }}</span>
+                        <div class="suc_button">
+                            <a href="{% url 'news-detail' el.id %}"><button class="btn btn-success">Открыть</a>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Записи отсутствуют</p>
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}
